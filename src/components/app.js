@@ -3,10 +3,7 @@ import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux'
 import fetchWeather from '../actions/index'
 import * as actions from '../actions/index'
-
-
-const TOP_STORIES = 'https://hacker-news.firebaseio.com/v0/topstories.json'
-console.log(TOP_STORIES)
+import WeatherList from '../containers/weather_list'
 
 const ArticleList = (props) => {
   return (
@@ -63,7 +60,7 @@ export default class App extends Component {
     return (
       <div>
         <CommentBox />
-
+        <WeatherList />
       </div>
     );
   }
