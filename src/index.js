@@ -8,9 +8,10 @@ import requireAuth from './components/require_authentication'
 import App from './components/app';
 import reducers from './reducers';
 
-import {Router, Route, browserHistory} from 'react-router'
+import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import Resouces from './components/resouces'
 
+import Signin from './components/auth/signin'
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
@@ -18,6 +19,7 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
+        <Route path="signin" component={Signin} />
         <Route path="resources" component={requireAuth(Resouces)} />
       </Route>
     </Router>
