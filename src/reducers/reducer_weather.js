@@ -1,4 +1,4 @@
-import {FETCH_WEATHER} from '../actions/index'
+import {FETCH_WEATHER} from '../actions/types'
 
 export default function (state=[], action) {
   // console.log('Action recieved', action)
