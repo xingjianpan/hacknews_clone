@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import {bindActionCreators} from 'redux'
-import fetchWeather from '../actions/index'
-import WeatherList from '../containers/weather_list'
-import SearchBox from '../containers/search'
-
-
-
+import Header from './header'
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <SearchBox />
-        <WeatherList />
+        <Header />
+        {this.props.children}
       </div>
     );
   }
