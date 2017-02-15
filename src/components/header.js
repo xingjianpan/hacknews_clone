@@ -29,9 +29,6 @@ class Header extends Component {
           <li className="nav-item">
             {this.authButton()}
           </li>
-          <li className="nav-item">
-            Sign in
-          </li>
         </ul>
       </nav>
       )

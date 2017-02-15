@@ -28,3 +28,20 @@ export function fetchWeather(city) {
 
   }
 }
+
+
+export function signinUser({email,password}) {
+
+  return function(dispatch){
+    // submit email/password to server
+    // if request is good
+    // -- update state to indicate user is authenticated
+    // -- save the JWT token
+    // -- redirect to the route /feature
+
+    // if request is bad
+    // - Sho an error to the user
+
+  }
+
+}

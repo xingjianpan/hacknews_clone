@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise'
+import reduxThunk from 'redux-thunk'
 
 import requireAuth from './components/require_authentication'
 import App from './components/app';
@@ -13,7 +14,7 @@ import Resouces from './components/resouces'
 
 import Signin from './components/auth/signin'
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise, reduxThunk)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
