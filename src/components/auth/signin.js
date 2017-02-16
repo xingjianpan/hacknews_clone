@@ -5,6 +5,16 @@ import { connect } from 'react-redux'
 
 class Signin extends Component {
 
+  renderAlert() {
+    if (this.props.errorMessage){
+      return (
+        <div className="alert alert-danger">
+          <strong>Opps!</strong> {this.props.errorMessage}
+        </div>
+        )
+    }
+  }
+
   handleFormSubmit({email, password}) {
     this.props.signinUser({email, password})
     // need to do something to log user in
@@ -20,8 +30,9 @@ class Signin extends Component {
       </fieldset>
       <fieldset className="form-group">
         <label>Password:</label>
-        <Field name="password" component="input" type="text"  className="form-control" />
+        <Field name="password" component="input" type="password"  className="form-control" />
       </fieldset>
+      {this.renderAlert()}
       <button action="submit" className="btn btn-primary">Sign in</button>
     </form>
     )
@@ -33,9 +44,12 @@ class Signin extends Component {
 //   form: 'signin',
 // })(Signin)
 
+function mapStateToProps(state) {
+  return {errorMessage: state.auth.error}
+}
 Signin = reduxForm({form:'signin'})(Signin)
 // connect Signinform with actions using 'connect'
-Signin = connect(null, actions)(Signin)
+Signin = connect(mapStateToProps, actions)(Signin)
 
 // do not forget to export default
 export default Signin

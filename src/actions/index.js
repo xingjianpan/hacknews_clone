@@ -2,10 +2,10 @@ import axios from 'axios'
 import {browserHistory} from 'react-router'
 
 import {
-  CHANGE_AUTH,
   FETCH_WEATHER,
-    AUTH_USER,
-  UNAUTH_USER
+  AUTH_USER,
+  UNAUTH_USER,
+  AUTH_ERROR
 } from './types'
 
 
@@ -15,14 +15,6 @@ const API_KEY = 'b7723a4ff8ad2d20660a601eb2ab5c07'
 
 const ROOT_URL = 'http://localhost:3090'
 
-// to avoid copy & paste strings in action and reducers
-
-export function authenticate(isLoggedin){
-  return {
-    type: CHANGE_AUTH,
-    payload: isLoggedin
-  }
-}
 
 export function fetchWeather(city) {
   const url = `${ROOT_URL}&q=${city},cn`
@@ -40,7 +32,7 @@ export function fetchWeather(city) {
 
 export function signinUser({email,password}) {
 
-  // use redux-thunk to return an function
+  // use 'redux-thunk' to return an function
   // instead an object
   return function(dispatch){
 
@@ -56,13 +48,32 @@ export function signinUser({email,password}) {
             browserHistory.push('/resources')
         })
         .catch(() => {
+          // if request is bad
+          // - Show an error to the user
+          dispatch(authError('Bad Login Info'))
 
         })
 
 
-    // if request is bad
-    // - Show an error to the user
 
   }
 
+}
+
+
+export function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error
+  }
+}
+
+
+export function signoutUser() {
+
+  localStorage.removeItem('token')
+  return {
+    type: UNAUTH_USER,
+
+  }
 }

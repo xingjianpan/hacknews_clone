@@ -7,28 +7,43 @@ import * as actions from '../actions'
 class Header extends Component {
 
   authButton() {
+    // console.log(this.props.authenticated)
+
     if(this.props.authenticated) {
-      return <button onClick={
-        () => this.props.authenticate(false)
-      }> Sign Out</button>
+      // show a link to sign out
+      return (
+        <li className="nav-item">
+           <Link className='nav-link' to="/signout">Sign Out</Link>
+        </li>
+        )
+
+    } else {
+    // else show a link to sign in or sing up
+    return (
+        [
+        <li className="nav-item" key={1}>
+        <Link className='nav-link'  to="/signin">Sign In</Link>
+        </li>,
+        <li className="nav-item" key={2}>
+        <Link className='nav-link' to="/signup">Sign Up</Link>
+        </li>
+        ]
+      )
     }
-    return <button onClick={
-      () => this.props.authenticate(true)
-    }>Sign in</button>
   }
+
   render(){
+
     return (
       <nav className="navbar navbar-light">
+        <Link to="/" className="navbar-brand">Home</Link>
         <ul className="nav navbar-nav">
           <li className="nav-item">
-            <Link to="/">Home </Link>
+            <Link className='nav-link' to="/resources">Resouces</Link>
           </li>
-          <li className="nav-item">
-            <Link to="/resources">Resouces</Link>
-          </li>
-          <li className="nav-item">
+
             {this.authButton()}
-          </li>
+
         </ul>
       </nav>
       )
@@ -37,7 +52,7 @@ class Header extends Component {
 
 function mapStateToProps(state){
   return {
-    authenticated: state.authenticated
+    authenticated: state.auth.authenticated
   }
 }
 
