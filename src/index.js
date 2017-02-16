@@ -21,7 +21,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <Route path="signin" component={Signin} />
-        <Route path="resources" component={requireAuth(Resouces)} />
+        <Route path="resources" component={Resouces} />
       </Route>
     </Router>
   </Provider>
