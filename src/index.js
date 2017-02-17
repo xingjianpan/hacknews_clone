@@ -14,7 +14,7 @@ import Resouces from './components/resouces'
 import Signin from './components/auth/signin'
 import Signout from './components/auth/signout'
 import Signup from './components/auth/signup'
-
+import Feature from './components/feature'
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise, reduxThunk)(createStore);
 
@@ -26,6 +26,7 @@ ReactDOM.render(
         <Route path="signout" component={Signout} />
         <Route path="signup" component={Signup} />
         <Route path="resources" component={Resouces} />
+        <Route path="feature" component={requireAuth(Feature)} />
       </Route>
     </Router>
   </Provider>
