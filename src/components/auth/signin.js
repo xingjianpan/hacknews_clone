@@ -3,6 +3,18 @@ import {Field, reduxForm} from 'redux-form'
 import * as actions from '../../actions'
 import { connect } from 'react-redux'
 
+
+
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+  <div>
+    <div>
+      <input {...input} placeholder={label} type={type}/>
+      {touched && ((error && <span className="error">{error}</span>) || (warning && <span>{warning}</span>))}
+    </div>
+  </div>
+)
+
+
 class Signin extends Component {
 
   renderAlert() {
@@ -25,12 +37,10 @@ class Signin extends Component {
     return (
     <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
       <fieldset className="form-group">
-        <label>Email:</label>
-        <Field name="email" component="input" type="email" className="form-control" />
+        <Field label="email" name="email" component={renderField} type="email" className="form-control" />
       </fieldset>
       <fieldset className="form-group">
-        <label>Password:</label>
-        <Field name="password" component="input" type="password"  className="form-control" />
+        <Field label="password" name="password" component={renderField}  type="password"  className="form-control" />
       </fieldset>
       {this.renderAlert()}
       <button action="submit" className="btn btn-primary">Sign in</button>

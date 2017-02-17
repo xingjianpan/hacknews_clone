@@ -14,10 +14,11 @@ import {
 const API_KEY = 'b7723a4ff8ad2d20660a601eb2ab5c07'
 
 const ROOT_URL = 'http://localhost:3090'
+const WEATHER_ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`
 
 
 export function fetchWeather(city) {
-  const url = `${ROOT_URL}&q=${city},cn`
+  const url = `${WEATHER_ROOT_URL}&q=${city},cn`
   const request = axios.get(url) //return a promise
 
   // console.log('Request:', request)
@@ -25,6 +26,32 @@ export function fetchWeather(city) {
   return {
     type: FETCH_WEATHER,
     payload: request
+
+  }
+}
+
+export function signupUser({email, password}) {
+
+  return function(dispatch){
+    axios.post(`${ROOT_URL}/signup`, {email, password})
+      .then(response=> {
+          // if request is good
+          // - update state to indicate user is authenticated
+          dispatch({type: AUTH_USER})
+          // - save the JWT token, use localstorage
+          localStorage.setItem('token', response.data.token)
+          // - redirect to the route /feature
+          browserHistory.push('/resources')
+      })
+        .catch(error => {
+            //NOTE here need to use error.response
+            dispatch(authError(error.response.data.error))
+          }
+          // if request is bad
+          // - Show an error to the user
+
+        )
+
 
   }
 }

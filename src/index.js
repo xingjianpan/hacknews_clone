@@ -13,6 +13,8 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import Resouces from './components/resouces'
 import Signin from './components/auth/signin'
 import Signout from './components/auth/signout'
+import Signup from './components/auth/signup'
+
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise, reduxThunk)(createStore);
 
@@ -22,6 +24,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <Route path="signin" component={Signin} />
         <Route path="signout" component={Signout} />
+        <Route path="signup" component={Signup} />
         <Route path="resources" component={Resouces} />
       </Route>
     </Router>
