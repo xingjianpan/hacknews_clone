@@ -8,14 +8,9 @@ import {
   AUTH_ERROR
 } from './types'
 
-
-
-
 const API_KEY = 'b7723a4ff8ad2d20660a601eb2ab5c07'
-
-const ROOT_URL = 'http://localhost:3090'
 const WEATHER_ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`
-
+const ROOT_URL = 'http://localhost:3090'
 
 export function fetchWeather(city) {
   const url = `${WEATHER_ROOT_URL}&q=${city},cn`
@@ -102,5 +97,17 @@ export function signoutUser() {
   return {
     type: UNAUTH_USER,
 
+  }
+}
+
+export function fetchMessage() {
+  return function(dispatch){
+    axios.get(ROOT_URL, {
+      // incldue token to make a authenticated request
+      headers: {authorization:localStorage.getItem('token')}
+    })
+      .then(response => {
+        console.log(response)
+      })
   }
 }
