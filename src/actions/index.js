@@ -5,12 +5,23 @@ import {
   FETCH_WEATHER,
   AUTH_USER,
   UNAUTH_USER,
-  AUTH_ERROR
+  AUTH_ERROR,
+  FETCH_MESSAGE,
+  FETCH_USERS
 } from './types'
 
 const API_KEY = 'b7723a4ff8ad2d20660a601eb2ab5c07'
 const WEATHER_ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`
 const ROOT_URL = 'http://localhost:3090'
+
+export function fetchUsers(){
+  const request = axios.get('https://jsonplaceholder.typicode.com/users')
+
+  return {
+    type: FETCH_USERS,
+    payload: request
+  }
+}
 
 export function fetchWeather(city) {
   const url = `${WEATHER_ROOT_URL}&q=${city},cn`
@@ -107,7 +118,24 @@ export function fetchMessage() {
       headers: {authorization:localStorage.getItem('token')}
     })
       .then(response => {
-        console.log(response)
+        // console.log(response)
+        dispatch({
+          type: FETCH_MESSAGE,
+          payload: response.data.message
+        })
       })
+  }
+}
+
+
+// redux-promise example for the same fetchMessage
+export function fetchMessage_redux_promise(){
+  const request = axios.get(ROOT_URL, {
+      headers: {authorization:localStorage.getItem('token')}
+  })
+
+  return {
+    type: FETCH_MESSAGE,
+    payload: request
   }
 }

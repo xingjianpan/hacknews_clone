@@ -15,3 +15,14 @@ td:first-of-type, td:first-of-type > div {
 .error {
   color: red;
 }
+
+.uesr-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 30%;
+  min-width: 300px;
+}

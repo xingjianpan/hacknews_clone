@@ -16,9 +16,12 @@ import Signout from './components/auth/signout'
 import Signup from './components/auth/signup'
 import Feature from './components/feature'
 import Welcome from './components/welcome'
-import {AUTH_USER} from './actions/types'
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise, reduxThunk)(createStore);
+import {AUTH_USER} from './actions/types'
+import Async from './middlewares/async' //custome middle
+
+
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise,reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers)
 const token = localStorage.getItem('token')
 

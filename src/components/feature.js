@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import * as actions from '../actions'
+import UserList from './user_list'
+
 
 class Feature extends Component {
   componentWillMount(){
@@ -8,10 +10,16 @@ class Feature extends Component {
   }
   render(){
     return(
-      <div> This is a feature</div>
+      <div>
+      {this.props.message}
+      <UserList />
+      </div>
       )
   }
 }
 
+function mapStateToProps(state){
+  return {message: state.auth.message}
+}
 
-export default connect(null, actions)(Feature)
+export default connect(mapStateToProps, actions)(Feature)
